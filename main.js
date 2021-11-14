@@ -12,7 +12,7 @@ noble.on('discover', (p) => {
             console.log('subscribed')
 
             c.on('data', state => {
-              console.log(state.toString('base64'));
+              console.log(state.toString());
             })
 
             c.subscribe()
