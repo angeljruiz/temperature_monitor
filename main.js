@@ -1,9 +1,6 @@
 let noble = require('noble');
 
 noble.on('discover', (p) => {
-  console.log({ name: p.advertisement.localName, id: p.uuid })
-  console.log()
-
   if (p.uuid === 'e868e71ae7ba' || p.advertisement.localName === 'DFRobot_ESP32') {
     p.once('connect', () => {
       console.log('connected')
