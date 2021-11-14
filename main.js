@@ -1,7 +1,7 @@
 let noble = require('noble');
 
 noble.on('discover', (p) => {
-  if (p.uuid === 'e868e71ae7ba' || p.advertisement.localName === 'DFRobot_ESP32') {
+  if (p.uuid === 'e868e71ae7ba') {
     p.once('connect', () => {
       console.log('connected')
 
@@ -9,8 +9,6 @@ noble.on('discover', (p) => {
         services.forEach(s => {
           s.characteristics.forEach( c => {
           if (c.uuid === '0000dfb100001000800000805f9b34fb') {
-            console.log('subscribed')
-
             c.on('data', state => {
               console.log(state.toString());
             })
@@ -27,8 +25,6 @@ noble.on('discover', (p) => {
 })
 
 noble.on('stateChange', state => {
-  console.log(state)
-
   if (state === 'poweredOn') noble.startScanning()
 })
 
