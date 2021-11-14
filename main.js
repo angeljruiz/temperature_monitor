@@ -9,7 +9,19 @@ noble.on('discover', (p) => {
       console.log('connected')
 
       p.discoverAllServicesAndCharacteristics((err, services, characteristics) => {
-        console.log({err, services, characteristics});
+        services.forEach(s => {
+          s.characteristics.forEach( c => {
+          if (c.uuid === '0000dfb100001000800000805f9b34fb') {
+            console.log('subscribed')
+
+            c.on('data', state => {
+              console.log(state.toString('base64'));
+            })
+
+            c.subscribe()
+          }
+        })})
+        console.log(services.map( s => s.characteristics));
       })
     })
     
@@ -23,7 +35,5 @@ noble.on('stateChange', state => {
 
   if (state === 'poweredOn') noble.startScanning()
 })
-
-
 
 
