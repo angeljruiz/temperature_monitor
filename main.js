@@ -5,7 +5,7 @@ noble.on('discover', (p) => {
     p.once('connect', () => {
       console.log('connected')
 
-      p.discoverAllServicesAndCharacteristics((err, services, characteristics) => {
+      p.discoverAllServicesAndCharacteristics((err, services) => {
         services.forEach(s => {
           s.characteristics.forEach( c => {
           if (c.uuid === '0000dfb100001000800000805f9b34fb') {
@@ -18,7 +18,6 @@ noble.on('discover', (p) => {
             c.subscribe()
           }
         })})
-        console.log(services.map( s => s.characteristics));
       })
     })
     
